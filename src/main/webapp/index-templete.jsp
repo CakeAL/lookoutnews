@@ -21,7 +21,7 @@
 <div class="layui-header ws-header">
     <div class="layui-container">
         <div class="ws-title">
-            <a class="title" href="/">瞭望新闻网</a>
+            <a class="title" href="#">瞭望新闻网</a>
         </div>
         <div class="ws-header-assist">
             <div class="layui-select-title" style="display: block; line-height: 60px"><input type="text" placeholder="搜索" value="" class="layui-input"><i class="layui-edge"></i></div>
@@ -29,16 +29,16 @@
         <div class="ws-header-menu">
             <ul class="layui-nav layui-bg-gray">
                 <li class="layui-nav-item layui-this">
-                    <a href="/">首页</a>
+                    <a href="#">首页</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="/">国际</a>
+                    <a href="#">国际</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="/">科技</a>
+                    <a href="#">科技</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="/">娱乐</a>
+                    <a href="#">娱乐</a>
                 </li>
             </ul>
             <div class="ws-header-tool">
@@ -50,7 +50,7 @@
                     %>
                     <a href="javascript:void(0)" onclick="displayLoginWindow()">登录/注册</a>
                     <% } else { %>
-                    欢迎: <%= user.getName() %>
+                        <button type="button" class="layui-btn layui-btn-primary" lay-on="test-offset-r">欢迎: <%= user.getName() %></button>
                     <% } %>
                 </div>
             </div>
@@ -60,7 +60,7 @@
 <!--登陆窗口部分-->
 <div id="loginWindow" class="loginWindow">
     <a href="javascript:void(0)" onclick="hideLoginWindow()">
-        关闭
+        ❌
     </a>
     <style>
         .demo-login-container{width: 320px; margin: 21px auto 0;}
@@ -115,7 +115,8 @@
     </form>
 </div>
 <div id="shadow" class="shadow_css"></div>
-
+<div style="height: 60px; width: 100%"></div>
+1233456678
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 

@@ -10,3 +10,24 @@ function hideLoginWindow() {
     document.getElementById("loginWindow").style.display = "none";
     document.getElementById("shadow").style.display = "none";
 }
+
+layui.use(function(){
+    var layer = layui.layer;
+    var util = layui.util;
+    var $ = layui.$;
+    // 事件
+    util.on('lay-on', {
+        'test-offset-r': function(){
+            layer.open({
+                type: 1,
+                offset: 'r',
+                anim: 'slideLeft', // 从右往左
+                area: ['320px', '100%'],
+                shade: 0.1,
+                shadeClose: true,
+                id: 'ID-demo-layer-direction-r',
+                content: '<div style="padding: 16px;">任意 HTML 内容</div>'
+            });
+        }
+    });
+});

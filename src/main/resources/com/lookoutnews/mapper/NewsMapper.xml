@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lookoutnews.mapper.NewsMapper">
+    <!--    private int id;-->
+<!--    private String title;-->
+<!--    private String author;-->
+<!--    private String publishTime;-->
+<!--    private String content;-->
+<!--    private String url;-->
+<!--    private String keyWord;-->
+    <update id="update" parameterType="com.lookoutnews.entity.News">
+        update news set title=#{title}, author=#{author}, publish_time=#{publishTime}, content=#{content}, url=#{url}, key_word=#{keyWord}
+        where id=#{id}
+    </update>
+
+    <insert id="addNews" parameterType="com.lookoutnews.entity.News">
+        insert into news(title, author, publish_time, content, url, key_word)
+        values(#{title},#{author},#{publishTime},#{content},#{url},#{keyWord})
+    </insert>
+
+    <select id="queryAllOrderById" resultType="com.lookoutnews.entity.News">
+        select Id as id,
+               title as title,
+               author as author,
+               publish_time as publishTime,
+               content as content,
+               url as url,
+               key_word as keyWord
+        from news
+        order by Id desc
+    </select>
+    <select id="queryByTitleWord" parameterType="string" resultType="com.lookoutnews.entity.News">
+        select Id as id,
+               title as title,
+               author as author,
+               publish_time as publishTime,
+               content as content,
+               url as url,
+               key_word as keyWord
+        from news
+        where title like #{keyWord}
+        order by Id desc
+    </select>
+
+
+</mapper>
