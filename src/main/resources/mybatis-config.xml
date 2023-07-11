@@ -18,6 +18,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="dept-mapper.xml"/>
+        <mapper resource="com/lookoutnews/mapper/UserMapper.xml"/>
     </mappers>
 </configuration>

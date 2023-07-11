@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lookoutnews.mapper.UserMapper">
+
+    <insert id="register" parameterType="com.lookoutnews.entity.User">
+        insert into user(Uname, Upwd, Uphone, uCreatetime, Hpath, IsVIP)
+        values(#{name},#{pwd},#{phone},#{createTime},null,#{isVIP})
+    </insert>
+
+    <select id="queryByUserPhone" parameterType="string" resultType="com.lookoutnews.entity.User">
+        select UId as id,
+               Uname as name,
+               Upwd as pwd,
+               Uphone as phone,
+               uCreatetime as createTime,
+               Hpath as hPath,
+               IsVIP as isVIP
+        from user where Uphone=#{phone}
+    </select>
+
+</mapper>
