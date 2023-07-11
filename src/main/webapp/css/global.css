@@ -89,3 +89,40 @@ body {
     background-color: #ffffff;
     z-index: 11;
 }
+
+footer {
+    display: block;
+}
+
+
+footer #lns {
+    height: 41px;
+    line-height: 40px;
+    background: #e3e3e3;
+    text-align: center;
+    color: rgba(56, 56, 56, 0.7);
+}
+
+footer #fi {
+    padding: 30px 0;
+    text-align: center;
+    background: #bbbbbb;
+    color: rgba(33, 33, 33, 0.7);
+}
+
+footer #fi p {
+    margin: 0;
+    line-height: 22px;
+}
+
+footer #fi p a {
+    color: rgba(71, 34, 180, 0.4);
+}
+
+
+footer #lns a {
+    color: rgba(47, 24, 114, 0.4);
+    opacity: .8;
+    display: inline-block;
+    margin: 0 15px;
+}

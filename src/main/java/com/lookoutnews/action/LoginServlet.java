@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-//@WebServlet(urlPatterns = "/login.do")
+@WebServlet(urlPatterns = "/login.do")
 public class LoginServlet extends HttpServlet {
 
     private UserService userService = new UserServiceImpl();
@@ -21,12 +21,11 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
-        // 其实是电话号
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
         User user = userService.queryByUserPhone(phone);
         if(password.equals(user.getPwd())){
-            System.out.println("fdafdasfdasdfasdf\n");
+            //System.out.println("fdafdasfdasdfasdf\n");
             //登陆成功
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
