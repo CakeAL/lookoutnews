@@ -1,13 +1,14 @@
-<%@ page import="org.apache.ibatis.session.SqlSession" %>
-<%@ page import="com.lookoutnews.util.MyBatisUtil" %>
-<%@ page import="com.lookoutnews.mapper.UserMapper" %>
-<%@ page import="com.lookoutnews.entity.User" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: cakeal
   Date: 2023/7/12
-  Time: 12:21
+  Time: 16:29
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="org.apache.ibatis.session.SqlSession" %>
+<%@ page import="com.lookoutnews.util.MyBatisUtil" %>
+<%@ page import="com.lookoutnews.mapper.UserMapper" %>
+<%@ page import="com.lookoutnews.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -39,7 +40,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item layui-hide layui-show-sm-inline-block">
         <a href="javascript:;">
-<!--          <img src="//unpkg.com/outeres@0.0.10/img/layui/icon-v2.png" class="layui-nav-img">-->
+          <!--          <img src="//unpkg.com/outeres@0.0.10/img/layui/icon-v2.png" class="layui-nav-img">-->
           <%=user.getName()%>
         </a>
         <dl class="layui-nav-child">
@@ -60,7 +61,7 @@
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree" lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
-<!--          <a class="" href="javascript:;">menu group 1</a>-->
+          <!--          <a class="" href="javascript:;">menu group 1</a>-->
           <dl class="layui-nav-child">
             <dd><a href="javascript:;" onclick="click1()">基本资料</a></dd>
             <dd><a href="javascript:;" onclick="click2()">更改昵称</a></dd>
@@ -68,16 +69,16 @@
             <dd><a href="javascript:;" onclick="click4()">购买VIP</a></dd>
           </dl>
         </li>
-<!--        <li class="layui-nav-item">-->
-<!--          <a href="javascript:;">menu group 2</a>-->
-<!--          <dl class="layui-nav-child">-->
-<!--            <dd><a href="javascript:;">list 1</a></dd>-->
-<!--            <dd><a href="javascript:;">list 2</a></dd>-->
-<!--            <dd><a href="javascript:;">超链接</a></dd>-->
-<!--          </dl>-->
-<!--        </li>-->
-<!--        <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>-->
-<!--        <li class="layui-nav-item"><a href="javascript:;">the links</a></li>-->
+        <!--        <li class="layui-nav-item">-->
+        <!--          <a href="javascript:;">menu group 2</a>-->
+        <!--          <dl class="layui-nav-child">-->
+        <!--            <dd><a href="javascript:;">list 1</a></dd>-->
+        <!--            <dd><a href="javascript:;">list 2</a></dd>-->
+        <!--            <dd><a href="javascript:;">超链接</a></dd>-->
+        <!--          </dl>-->
+        <!--        </li>-->
+        <!--        <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>-->
+        <!--        <li class="layui-nav-item"><a href="javascript:;">the links</a></li>-->
       </ul>
     </div>
   </div>
@@ -96,13 +97,13 @@
           <p>手机: <%=user.getPhone()%></p>
           <p>创建账号时间: <%=user.getCreateTime().toString()%></p>
           <p>是否是会员:
-          <%
-            if (user.getIsVIP() == 1){
-              out.print("是");
-            } else {
-              out.print("否");
-            }
-          %>
+            <%
+              if (user.getIsVIP() == 1){
+                out.print("是");
+              } else {
+                out.print("否");
+              }
+            %>
           </p>
         </div>
       </div>
@@ -147,34 +148,34 @@
             <input type="submit" value="提交">
           </form>
         </div>
-        </div>
       </div>
-      <br><br>
     </div>
+    <br><br>
   </div>
-  <div class="layui-body" id="购买VIP">
-    <!-- 内容主体区域 -->
-    <div style="padding: 15px;">
-      <blockquote class="layui-elem-quote layui-text">
-        购买VIP
-      </blockquote>
-      <div class="layui-card layui-panel">
-        <div class="layui-card-header">
-          这个页面可以用来花你的钱。
-        </div>
-        <div class="layui-card-body">
-          不想写了，累了。
-          <img src="img/mm_facetoface_collect_qrcode_1689139718049.png" alt="支付" style="width: 447px; height: 609px">
-          <img src="img/1689140044689.jpg" alt="支付宝" style="width: 447px; height: 609px">
-        </div>
+</div>
+<div class="layui-body" id="购买VIP">
+  <!-- 内容主体区域 -->
+  <div style="padding: 15px;">
+    <blockquote class="layui-elem-quote layui-text">
+      购买VIP
+    </blockquote>
+    <div class="layui-card layui-panel">
+      <div class="layui-card-header">
+        这个页面可以用来花你的钱。
       </div>
-      <br><br>
+      <div class="layui-card-body">
+        不想写了，累了。
+        <img src="img/mm_facetoface_collect_qrcode_1689139718049.png" alt="支付" style="width: 447px; height: 609px">
+        <img src="img/1689140044689.jpg" alt="支付宝" style="width: 447px; height: 609px">
+      </div>
     </div>
+    <br><br>
   </div>
-  <div class="layui-footer">
-    <!-- 底部固定区域 -->
-    用户中心页面
-  </div>
+</div>
+<div class="layui-footer">
+  <!-- 底部固定区域 -->
+  用户中心页面
+</div>
 </div>
 
 <script>

@@ -27,5 +27,6 @@
     <mappers>
         <mapper resource="com/lookoutnews/mapper/UserMapper.xml"/>
         <mapper resource="com/lookoutnews/mapper/NewsMapper.xml"/>
+        <mapper resource="com/lookoutnews/mapper/AdminMapper.xml"/>
     </mappers>
 </configuration>

@@ -13,7 +13,7 @@
 <html lang="zh-cn">
 <head>
   <meta charset="utf-8">
-  <title>瞭望新闻</title>
+  <title>瞭望新闻:新闻</title>
   <script src="js/jquery-3.7.0.js" type="text/javascript"></script>
   <script src="layui/layui.js" type="text/javascript"></script>
   <script src="js/index.js" type="text/javascript"></script>

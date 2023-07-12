@@ -15,7 +15,7 @@
 <html lang="zh-cn">
 <head>
   <meta charset="utf-8">
-  <title>瞭望新闻主页</title>
+  <title>瞭望新闻:搜索</title>
   <script src="js/jquery-3.7.0.js" type="text/javascript"></script>
   <script src="layui/layui.js" type="text/javascript"></script>
   <script src="js/index.js" type="text/javascript"></script>
