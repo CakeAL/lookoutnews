@@ -28,7 +28,7 @@
       <a class="title" href="#">瞭望新闻网</a>
     </div>
     <div class="ws-header-assist">
-      <div class="layui-select-title" style="display: block; line-height: 60px"><input type="text" placeholder="搜索" value="" class="layui-input"><i class="layui-edge"></i></div>
+      <div class="layui-select-title" style="display: block; line-height: 60px"><input type="text" placeholder="搜索" value="" class="layui-input"><i class="layui-edge" id="search-box"></i><span style="position: relative;left: 167px;top: -47px;" id="search-text">搜索</span></div>
     </div>
     <div class="ws-header-menu">
       <ul class="layui-nav layui-bg-gray">

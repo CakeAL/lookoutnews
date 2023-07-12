@@ -31,3 +31,13 @@ layui.use(function(){
         }
     });
 });
+
+$(function () {
+    $('#search-text').click(function() {
+            var inputText = $("#search-box").val(); // 获取输入框的值
+
+            window.location.href = 'search.jsp?keyWord='+inputText;
+
+            $("#search-box").val(''); // 清空输入框的值
+    });
+});
