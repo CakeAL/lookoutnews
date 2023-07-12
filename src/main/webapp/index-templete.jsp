@@ -165,7 +165,7 @@
                     $("#failPwd").html(data);
                 }
             });
-            //return false; // 阻止默认 form 跳转
+            return false; // 阻止默认 form 跳转
         });
     });
 

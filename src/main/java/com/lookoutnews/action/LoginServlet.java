@@ -30,7 +30,8 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
             //转发到主页，处理登陆后的主页
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            //req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            resp.sendRedirect("/index.jsp");
         } else {
             //req.setAttribute("errorMsg", "用户名或密码错误");
             PrintWriter out = resp.getWriter();
