@@ -9,11 +9,15 @@
 <%@ page import="com.lookoutnews.util.MyBatisUtil" %>
 <%@ page import="com.lookoutnews.mapper.UserMapper" %>
 <%@ page import="com.lookoutnews.entity.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.lookoutnews.mapper.NewsMapper" %>
+<%@ page import="com.lookoutnews.entity.News" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>用户中心</title>
+  <title>后台管理页面</title>
   <script src="js/jquery-3.7.0.js" type="text/javascript"></script>
   <script src="layui/layui.js" type="text/javascript"></script>
   <script src="js/index.js" type="text/javascript"></script>
@@ -26,11 +30,12 @@
   String username = request.getParameter("username");
   SqlSession sqlSession = MyBatisUtil.getSqlSession();
   UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+  NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
   //User user = userMapper.queryByUserId();
 %>
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <div class="layui-logo layui-hide-xs layui-bg-black">用户中心</div>
+    <div class="layui-logo layui-hide-xs layui-bg-black">后台管理页面</div>
     <!-- 头部区域（可配合layui 已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <!-- 移动端显示 -->
@@ -63,10 +68,10 @@
         <li class="layui-nav-item layui-nav-itemed">
           <!--          <a class="" href="javascript:;">menu group 1</a>-->
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;" onclick="click1()">基本资料</a></dd>
-            <dd><a href="javascript:;" onclick="click2()">更改昵称</a></dd>
-            <dd><a href="javascript:;" onclick="click3()">更改密码</a></dd>
-            <dd><a href="javascript:;" onclick="click4()">购买VIP</a></dd>
+            <dd><a href="javascript:;" onclick="click1()">用户信息</a></dd>
+            <dd><a href="javascript:;" onclick="click2()">更改用户信息</a></dd>
+            <dd><a href="javascript:;" onclick="click3()">新闻表</a></dd>
+            <dd><a href="javascript:;" onclick="click4()">发布新闻</a></dd>
           </dl>
         </li>
         <!--        <li class="layui-nav-item">-->
@@ -82,111 +87,257 @@
       </ul>
     </div>
   </div>
-  <div class="layui-body" id="基本资料">
+  <div class="layui-body" id="用户信息">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
       <blockquote class="layui-elem-quote layui-text">
-        基本资料
+        用户信息
       </blockquote>
       <div class="layui-card layui-panel">
         <div class="layui-card-header">
-
         </div>
         <div class="layui-card-body">
-fsadfdsafdsafdsafsaafsafsdfsda
+          <table class="layui-table" lay-even>
+            <colgroup>
+              <col width="150">
+              <col width="150">
+              <col>
+            </colgroup>
+            <thead>
+            <tr style="background-color: #16b777; color: white">
+              <th>Id</th>
+              <th>昵称</th>
+              <th>电话号</th>
+              <th>注册日期</th>
+              <th>是否是VIP</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+              List<User> userList = userMapper.queryAll();
+              for (User user: userList){
+            %>
+            <tr>
+              <td><%=Integer.toString(user.getId())%></td>
+              <td><%=user.getName()%></td>
+              <td><%=user.getPhone()%></td>
+              <td><%=user.getCreateTime().toString()%></td>
+              <td><%
+                if (user.getIsVIP() == 1){
+                  out.print("是");
+                } else {
+                  out.print("否");
+                }
+              %></td>
+            </tr>
+            <%
+              }
+            %>
+            </tbody>
+          </table>
         </div>
       </div>
       <br><br>
     </div>
   </div>
-  <div class="layui-body" id="更改昵称">
+  <div class="layui-body" id="更改用户信息">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
       <blockquote class="layui-elem-quote layui-text">
-        更改昵称
+        更改用户信息
       </blockquote>
       <div class="layui-card layui-panel">
         <div class="layui-card-header">
 
         </div>
         <div class="layui-card-body">
-fsdafdsafdasfsafs
+          <form action="changeUser.do" method="get">
+            <div class="layui-form-item">
+              <div class="layui-input-group">
+                <div class="layui-input-split layui-input-prefix">
+                  id
+                </div>
+                <input type="text" placeholder="请输入id" class="layui-input" name="id">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-group">
+                <div class="layui-input-split layui-input-prefix">
+                  昵称
+                </div>
+                <input type="text" placeholder="请输入需要变更的昵称" class="layui-input" name="name">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-group">
+                <div class="layui-input-split layui-input-prefix">
+                  手机
+                </div>
+                <input type="text" placeholder="请输入需要变更的电话" class="layui-input" name="phone">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-group">
+                <div class="layui-input-split layui-input-prefix">
+                  是否VIP
+                </div>
+                <input type="text" placeholder="是为1，输入其他内容为否" class="layui-input" name="isVIP">
+              </div>
+            </div>
+            <input type="submit" class="layui-btn layui-btn-normal" value="确定更改">
+          </form>
         </div>
       </div>
       <br><br>
     </div>
   </div>
-  <div class="layui-body" id="更改密码">
+  <div class="layui-body" id="新闻表">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
       <blockquote class="layui-elem-quote layui-text">
-        更改密码
+        新闻表
       </blockquote>
       <div class="layui-card layui-panel">
         <div class="layui-card-header">
-          下面是充数内容，为的是出现滚动条
         </div>
         <div class="layui-card-body">
-          <p>请输入你的新密码：</p>
-fsdafsdafdsafdsafsafdsa
+          <table class="layui-table" lay-even>
+            <colgroup>
+              <col width="150">
+              <col width="150">
+              <col>
+            </colgroup>
+            <thead>
+            <tr style="background-color: #16b777; color: white">
+              <th>Id</th>
+              <th>标题</th>
+              <th>作者</th>
+              <th>发布日期</th>
+              <th>内容前100字</th>
+              <th>关键词</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+              List<News> newsList = newsMapper.queryAllOrderById();
+              for (News news: newsList){
+            %>
+            <tr>
+              <td><%=Integer.toString(news.getId())%></td>
+              <td><a href="news.jsp?id=<%=news.getId()%>"><%=news.getTitle()%></a></td>
+              <td><%=news.getAuthor()%></td>
+              <td><%=news.getPublishTime()%></td>
+              <td>
+                <%
+                  String newsContent = "";
+                  if (news.getContent().length() >= 101) {
+                    newsContent += news.getContent().substring(0, 100);
+                  } else {
+                    newsContent += news.getContent();
+                  }
+                  StringBuilder stringBuilder = new StringBuilder();
+                  for (int i = 0; i < newsContent.length(); i++ ){
+                    char c = newsContent.charAt(i);
+                    if (c == '<' || c == '>' || c == '&' || c == '"') {
+                      stringBuilder.append(' ');
+                      //直接暴力删除字符串中所有的html标签的尖括号，&符和引号
+                    }
+                    else stringBuilder.append(c);
+                  }
+                  out.println(stringBuilder.toString());
+                %>
+              </td>
+              <td><%=news.getKeyWord()%></td>
+            </tr>
+            <%
+              }
+            %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
     <br><br>
   </div>
-</div>
-<div class="layui-body" id="购买VIP">
-  <!-- 内容主体区域 -->
-  <div style="padding: 15px;">
-    <blockquote class="layui-elem-quote layui-text">
-      购买VIP
-    </blockquote>
-    <div class="layui-card layui-panel">
-      <div class="layui-card-header">
-        这个页面可以用来花你的钱。
+  <div class="layui-body" id="发布新闻">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+      <blockquote class="layui-elem-quote layui-text">
+        发布新闻
+      </blockquote>
+      <div class="layui-card layui-panel">
+        <div class="layui-card-header">
+        </div>
+        <div class="layui-card-body">
+          <form action="addNews.do" method="post">
+            <div class="layui-form-item">
+              <div class="layui-input-group">
+                <div class="layui-input-split layui-input-prefix">
+                  标题
+                </div>
+                <input type="text" placeholder="请输入标题" class="layui-input" name="title">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-group">
+                <div class="layui-input-split layui-input-prefix">
+                  作者
+                </div>
+                <input type="text" placeholder="请输入作者" class="layui-input" name="author">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-group">
+                <div class="layui-input-split layui-input-prefix">
+                  关键词
+                </div>
+                <input type="text" placeholder="关键词用','隔开" class="layui-input" name="keyWord">
+              </div>
+            </div>
+            <p>下方输入文章内容，支持Markdown格式。</p>
+            <div class="layui-form">
+              <hr class="ws-space-16">
+              <textarea name="content" placeholder="请在此输入文章内容" class="layui-textarea"></textarea>
+            </div>
+            <input type="submit" class="layui-btn layui-btn-normal" value="发布新闻">
+          </form>
+        </div>
       </div>
-      <div class="layui-card-body">
-        不想写了，累了。
-        <img src="img/mm_facetoface_collect_qrcode_1689139718049.png" alt="支付" style="width: 447px; height: 609px">
-        <img src="img/1689140044689.jpg" alt="支付宝" style="width: 447px; height: 609px">
-      </div>
+      <br><br>
     </div>
-    <br><br>
+  </div>
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    后台管理页面
   </div>
 </div>
-<div class="layui-footer">
-  <!-- 底部固定区域 -->
-  用户中心页面
-</div>
-</div>
-
 <script>
   $(function (){
     click1();
   });
   function click1(){
-    $("#基本资料").show();
-    $("#更改昵称").hide();
-    $("#更改密码").hide();
-    $("#购买VIP").hide();
+    $("#用户信息").show();
+    $("#更改用户信息").hide();
+    $("#新闻表").hide();
+    $("#发布新闻").hide();
   }
   function click2(){
-    $("#基本资料").hide();
-    $("#更改昵称").show();
-    $("#更改密码").hide();
-    $("#购买VIP").hide();
+    $("#用户信息").hide();
+    $("#更改用户信息").show();
+    $("#新闻表").hide();
+    $("#发布新闻").hide();
   }
   function click3(){
-    $("#基本资料").hide();
-    $("#更改昵称").hide();
-    $("#更改密码").show();
-    $("#购买VIP").hide();
+    $("#用户信息").hide();
+    $("#更改用户信息").hide();
+    $("#新闻表").show();
+    $("#发布新闻").hide();
   }
   function click4(){
-    $("#基本资料").hide();
-    $("#更改昵称").hide();
-    $("#更改密码").hide();
-    $("#购买VIP").show();
+    $("#用户信息").hide();
+    $("#更改用户信息").hide();
+    $("#新闻表").hide();
+    $("#发布新闻").show();
   }
   //JS
   layui.use(['element', 'layer', 'util'], function(){

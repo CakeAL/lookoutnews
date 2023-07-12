@@ -39,5 +39,15 @@
                IsVIP as isVIP
         from user where UId=#{id}
     </select>
+    <select id="queryAll" resultType="com.lookoutnews.entity.User">
+        select UId as id,
+               Uname as name,
+               Upwd as pwd,
+               Uphone as phone,
+               uCreatetime as createTime,
+               Hpath as hPath,
+               IsVIP as isVIP
+        from user
+    </select>
 
 </mapper>

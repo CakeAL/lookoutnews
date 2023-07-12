@@ -146,10 +146,9 @@
             <input type="submit" value="提交">
           </form>
         </div>
-        </div>
       </div>
-      <br><br>
     </div>
+    <br><br>
   </div>
   <div class="layui-body" id="购买VIP">
     <!-- 内容主体区域 -->
