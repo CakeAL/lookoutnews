@@ -1,4 +1,10 @@
-<%@ page import="com.lookoutnews.entity.User" %><%--
+<%@ page import="com.lookoutnews.entity.User" %>
+<%@ page import="com.lookoutnews.mapper.NewsMapper" %>
+<%@ page import="org.apache.ibatis.session.SqlSession" %>
+<%@ page import="com.lookoutnews.util.MyBatisUtil" %>
+<%@ page import="com.github.pagehelper.PageHelper" %>
+<%@ page import="com.lookoutnews.entity.News" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: cakeal
   Date: 2023/7/11
@@ -120,6 +126,51 @@
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+<%--新闻时间线--%>
+<div class="layui-timeline ws-timeline">
+    <%
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
+        //进行分页
+        PageHelper.startPage(1, 10);
+        List<News> newsList = newsMapper.queryAllOrderById();
+        for (News news: newsList){
+    %>
+    <div class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis"></i>
+        <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title"><%=news.getPublishTime()%></h3>
+            <div class="layui-panel">
+                <div style="padding: 32px;">
+                    <h4 class="layui-timeline-title"><%=news.getTitle()%></h4>
+                    <p>
+                        <%
+                            if (news.getContent().length() >= 76){
+                        %>
+                            <%=news.getContent().substring(0, 75)%>...
+                        <%
+                            } else {
+                        %>
+                            <%=news.getContent()%>
+                        <%
+                            }
+                        %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%
+        }
+    %>
+
+    <div class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis"></i>
+        <div class="layui-timeline-content layui-text">
+            <div class="layui-timeline-title">过去</div>
+        </div>
+    </div>
+</div>
 <footer>
     <div id="lns">
         <a href="#" target="_blank">关于瞭望新闻</a>
