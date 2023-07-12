@@ -23,10 +23,10 @@
 </head>
 <body>
 <%
-  int id = Integer.parseInt(request.getParameter("id"));
+  String username = request.getParameter("username");
   SqlSession sqlSession = MyBatisUtil.getSqlSession();
   UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-  User user = userMapper.queryByUserId(id);
+  //User user = userMapper.queryByUserId();
 %>
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
@@ -41,7 +41,7 @@
       <li class="layui-nav-item layui-hide layui-show-sm-inline-block">
         <a href="javascript:;">
           <!--          <img src="//unpkg.com/outeres@0.0.10/img/layui/icon-v2.png" class="layui-nav-img">-->
-          <%=user.getName()%>
+          <%=username%>
         </a>
         <dl class="layui-nav-child">
           <dd><a href="javascript:;">Your Profile</a></dd>
@@ -93,18 +93,7 @@
 
         </div>
         <div class="layui-card-body">
-          <p>昵称: <%=user.getName()%></p>
-          <p>手机: <%=user.getPhone()%></p>
-          <p>创建账号时间: <%=user.getCreateTime().toString()%></p>
-          <p>是否是会员:
-            <%
-              if (user.getIsVIP() == 1){
-                out.print("是");
-              } else {
-                out.print("否");
-              }
-            %>
-          </p>
+fsadfdsafdsafdsafsaafsafsdfsda
         </div>
       </div>
       <br><br>
@@ -121,11 +110,7 @@
 
         </div>
         <div class="layui-card-body">
-          <p>请输入你的新昵称：</p>
-          <form action="changeName.do?id=<%=user.getId()%>" method="post">
-            <input type="text" id="textName" name="name" placeholder="">
-            <input type="submit" value="提交">
-          </form>
+fsdafdsafdasfsafs
         </div>
       </div>
       <br><br>
@@ -143,10 +128,7 @@
         </div>
         <div class="layui-card-body">
           <p>请输入你的新密码：</p>
-          <form action="changePassword.do?id=<%=user.getId()%>" method="post">
-            <input type="text" id="newpwd" name="newpwd" placeholder="新密码">
-            <input type="submit" value="提交">
-          </form>
+fsdafsdafdsafdsafsafdsa
         </div>
       </div>
     </div>

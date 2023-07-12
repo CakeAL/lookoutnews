@@ -138,7 +138,6 @@
       </blockquote>
       <div class="layui-card layui-panel">
         <div class="layui-card-header">
-          下面是充数内容，为的是出现滚动条
         </div>
         <div class="layui-card-body">
           <p>请输入你的新密码：</p>

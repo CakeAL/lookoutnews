@@ -24,7 +24,9 @@ public class BackendLoginServlet extends HttpServlet {
         BackendAdmin backendAdmin = adminService.queryByUserName(userName);
         //System.out.println(backendAdmin);
         if (backendAdmin != null && password.equals(backendAdmin.getPassword())){
-            req.getRequestDispatcher("backend/backend.jsp").forward(req, resp);
+            //req.getRequestDispatcher("/backend.jsp").forward(req, resp);
+
+            resp.sendRedirect("backend.jsp?username="+userName);
         } else {
             PrintWriter out = resp.getWriter();
             out.println("用户名或密码错误");

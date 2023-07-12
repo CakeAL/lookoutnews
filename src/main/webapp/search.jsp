@@ -131,7 +131,7 @@
 
 %>
 <%--新闻时间线--%>
-<div class="layui-timeline ws-timeline">
+<div class="layui-timeline ws-timeline" style="margin: 10px 20px">
   <%
     for (News news: newsList){
   %>
