@@ -4,7 +4,8 @@
 <%@ page import="com.lookoutnews.util.MyBatisUtil" %>
 <%@ page import="com.github.pagehelper.PageHelper" %>
 <%@ page import="com.lookoutnews.entity.News" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: cakeal
   Date: 2023/7/11
@@ -22,6 +23,39 @@
     <script src="js/md5.js" type="text/javascript"></script>
     <link href="layui/css/layui.css" rel="stylesheet" type="text/css">
     <link href="css/global.css" rel="stylesheet" type="text/css">
+    <style>
+        .ws-timeline {
+            margin-left: 100px;
+            width: 60%;
+        }
+
+        .ws-tab-card {
+            width: 90%;
+            margin: 10px auto;
+            height: 739px;
+        }
+
+        .headlines-title {
+            text-align: center;
+            font-size: 40px;
+            color: #16b777;
+            transition: 0.3s;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .headlines-title:hover{
+            color: #16baaa
+        }
+
+        .headlines-img {
+            width: 85%;
+            height: 79%;
+            margin: auto;
+            text-align: center;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <div class="layui-header ws-header">
@@ -122,15 +156,43 @@
 </div>
 <div id="shadow" class="shadow_css"></div>
 <div style="height: 60px; width: 100%"></div>
-1233456678
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-<%--新闻时间线--%>
-<div class="layui-timeline ws-timeline">
+<div class="layui-tab layui-tab-card ws-tab-card">
+    <ul class="layui-tab-title">
+        <li class="layui-this">头条1</li>
+        <li>头条2</li>
+        <li>头条3</li>
+    </ul>
     <%
         SqlSession sqlSession = MyBatisUtil.getSqlSession();
         NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
+        News headlines1 = newsMapper.queryByNewsId(417);
+        News headlines2 = newsMapper.queryByNewsId(418);
+        News headlines3 = newsMapper.queryByNewsId(419);
+    %>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <a href="news.jsp?id=<%=Integer.toString(headlines1.getId())%>">
+                <p class="headlines-title"><%=headlines1.getTitle()%></p>
+                <img src="img/417.png" class="headlines-img" alt="新闻图片">
+            </a>
+        </div>
+        <div class="layui-tab-item">
+            <a href="news.jsp?id=<%=Integer.toString(headlines2.getId())%>">
+                <p class="headlines-title"><%=headlines2.getTitle()%></p>
+                <img src="img/418.png" class="headlines-img" alt="新闻图片">
+            </a>
+        </div>
+        <div class="layui-tab-item">
+            <a href="news.jsp?id=<%=Integer.toString(headlines3.getId())%>">
+            <p class="headlines-title"><%=headlines3.getTitle()%></p>
+            <img src="img/419.png" class="headlines-img" alt="新闻图片">
+        </a></div>
+    </div>
+</div>
+<%--新闻时间线--%>
+<div class="layui-timeline ws-timeline">
+    <%
         //进行分页
         PageHelper.startPage(1, 10);
         List<News> newsList = newsMapper.queryAllOrderById();
@@ -142,7 +204,7 @@
             <h3 class="layui-timeline-title"><%=news.getPublishTime()%></h3>
             <div class="layui-panel">
                 <div style="padding: 32px;">
-                    <h4 class="layui-timeline-title"><%=news.getTitle()%></h4>
+                    <a href="news.jsp?id=<%=Integer.toString(news.getId())%>"><h4 class="layui-timeline-title"><%=news.getTitle()%></h4></a>
                     <p>
                         <%
                             if (news.getContent().length() >= 76){
@@ -155,6 +217,9 @@
                         <%
                             }
                         %>
+                    </p>
+                    <p>
+                        作者：<%=news.getAuthor()%><span style="float: right">关键词：<%=news.getKeyWord()%></span>
                     </p>
                 </div>
             </div>
@@ -171,6 +236,9 @@
         </div>
     </div>
 </div>
+<ul class="layui-fixbar">
+    <li class="layui-icon layui-icon-top layui-fixbar-top" lay-type="top" style="display: list-item;"></li>
+</ul>
 <footer>
     <div id="lns">
         <a href="#" target="_blank">关于瞭望新闻</a>
@@ -213,6 +281,40 @@
                 }
             });
             //return false; // 阻止默认 form 跳转
+        });
+    });
+
+    layui.use(function(){
+        var util = layui.util;
+        // 自定义固定条
+        util.fixbar({
+            bars: [{ // 定义可显示的 bar 列表信息 -- v2.8.0 新增
+                type: 'share',
+                icon: 'layui-icon-share'
+            }],
+            // bar1: true,
+            // bar2: true,
+            // default: false, // 是否显示默认的 bar 列表 --  v2.8.0 新增
+            // bgcolor: '#393D52', // bar 的默认背景色
+            // css: {right: 100, bottom: 100},
+            // target: '#target-test', // 插入 fixbar 节点的目标元素选择器
+            // duration: 300, // top bar 等动画时长（毫秒）
+            on: { // 任意事件 --  v2.8.0 新增
+                mouseenter: function(type){
+                    layer.tips(type, this, {
+                        tips: 4,
+                        fixed: true
+                    });
+                },
+                mouseleave: function(type){
+                    layer.closeAll('tips');
+                }
+            },
+            // 点击事件
+            click: function(type){
+                console.log(this, type);
+                // layer.msg(type);
+            }
         });
     });
 </script>

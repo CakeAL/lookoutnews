@@ -11,4 +11,5 @@ public interface NewsMapper {
     void addNews(News news);
     List<News> queryAllOrderById();
     List<News> queryByTitleWord(String keyWord);
+    News queryByNewsId(int id);
 }

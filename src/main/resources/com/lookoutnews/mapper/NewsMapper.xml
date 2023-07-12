@@ -43,6 +43,17 @@
         where title like #{keyWord}
         order by Id desc
     </select>
+    <select id="queryByNewsId" parameterType="int" resultType="com.lookoutnews.entity.News">
+        select Id as id,
+               title as title,
+               author as author,
+               publish_time as publishTime,
+               content as content,
+               url as url,
+               key_word as keyWord
+        from news
+        where Id=#{id}
+    </select>
 
 
 </mapper>

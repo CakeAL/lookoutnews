@@ -120,6 +120,10 @@
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+
+<ul class="layui-fixbar">
+    <li class="layui-icon layui-icon-top layui-fixbar-top" lay-type="top" style="display: list-item;"></li>
+</ul>
 <footer>
     <div id="lns">
         <a href="#" target="_blank">关于瞭望新闻</a>
@@ -162,6 +166,40 @@
                 }
             });
             //return false; // 阻止默认 form 跳转
+        });
+    });
+
+    layui.use(function(){
+        var util = layui.util;
+        // 自定义固定条
+        util.fixbar({
+            bars: [{ // 定义可显示的 bar 列表信息 -- v2.8.0 新增
+                type: 'share',
+                icon: 'layui-icon-share'
+            }],
+            // bar1: true,
+            // bar2: true,
+            // default: false, // 是否显示默认的 bar 列表 --  v2.8.0 新增
+            // bgcolor: '#393D52', // bar 的默认背景色
+            // css: {right: 100, bottom: 100},
+            // target: '#target-test', // 插入 fixbar 节点的目标元素选择器
+            // duration: 300, // top bar 等动画时长（毫秒）
+            on: { // 任意事件 --  v2.8.0 新增
+                mouseenter: function(type){
+                    layer.tips(type, this, {
+                        tips: 4,
+                        fixed: true
+                    });
+                },
+                mouseleave: function(type){
+                    layer.closeAll('tips');
+                }
+            },
+            // 点击事件
+            click: function(type){
+                console.log(this, type);
+                // layer.msg(type);
+            }
         });
     });
 </script>
