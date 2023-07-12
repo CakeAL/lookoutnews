@@ -8,6 +8,16 @@
         insert into user(Uname, Upwd, Uphone, uCreatetime, Hpath, IsVIP)
         values(#{name},#{pwd},#{phone},#{createTime},null,#{isVIP})
     </insert>
+    <update id="update" parameterType="com.lookoutnews.entity.User">
+        update user
+        set Uname=#{name},
+            Upwd=#{pwd},
+            Uphone=#{phone},
+            uCreatetime=#{createTime},
+            Hpath=#{hPath},
+            IsVIP=#{isVIP}
+        where Uid=#{id}
+    </update>
 
     <select id="queryByUserPhone" parameterType="string" resultType="com.lookoutnews.entity.User">
         select UId as id,
@@ -18,6 +28,16 @@
                Hpath as hPath,
                IsVIP as isVIP
         from user where Uphone=#{phone}
+    </select>
+    <select id="queryByUserId" parameterType="int" resultType="com.lookoutnews.entity.User">
+        select UId as id,
+               Uname as name,
+               Upwd as pwd,
+               Uphone as phone,
+               uCreatetime as createTime,
+               Hpath as hPath,
+               IsVIP as isVIP
+        from user where UId=#{id}
     </select>
 
 </mapper>

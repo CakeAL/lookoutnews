@@ -90,7 +90,9 @@
                     %>
                     <a href="javascript:void(0)" onclick="displayLoginWindow()">登录/注册</a>
                     <% } else { %>
+                        <a href="usercenter.jsp?id=<%=Integer.toString(user.getId())%>">
                         <button type="button" class="layui-btn layui-btn-primary" lay-on="test-offset-r">欢迎: <%= user.getName() %></button>
+                        </a>
                     <% } %>
                 </div>
             </div>

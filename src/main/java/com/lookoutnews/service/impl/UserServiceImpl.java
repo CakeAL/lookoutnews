@@ -10,8 +10,15 @@ public class UserServiceImpl implements UserService {
     public void register(User user) {
         userMapper.register(user);
     }
-
     public User queryByUserPhone(String phone) {
         return userMapper.queryByUserPhone(phone);
     }
+    public User queryByUserId(int id){
+        return userMapper.queryByUserId(id);
+    }
+
+    public void updateUser(User user){
+        userMapper.update(user);
+    }
+
 }
